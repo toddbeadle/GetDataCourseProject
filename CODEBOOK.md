@@ -56,41 +56,41 @@ Download and unzip data file from link provided
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
 You should create one R script called run_analysis.R that does the following. 
-1. Merges the training and the test sets to create one data set.
-2. Extracts only the measurements on the mean and standard deviation for each measurement. 
-3. Uses descriptive activity names to name the activities in the data set
-4. Appropriately labels the data set with descriptive variable names. 
-5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+   1. Merges the training and the test sets to create one data set.
+   2. Extracts only the measurements on the mean and standard deviation for each measurement. 
+   3. Uses descriptive activity names to name the activities in the data set
+   4. Appropriately labels the data set with descriptive variable names. 
+   5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 ####File locations:
-UCI_HAR_Dataset/features.txt
-UCI_HAR_Dataset/activity_labels.txt
-UCI_HAR_Dataset/features_info.txt
-test_subject_df <- UCI_HAR_Dataset/test/subject_test.txt
-test_activity_df <- UCI_HAR_Dataset/test/y_test.txt
-test_observations_df <- UCI_HAR_Dataset/test/X_test.txt
-train_subject_df <- UCI_HAR_Dataset/train/subject_train.txt
-train_activity_df <- UCI_HAR_Dataset/train/y_train.txt
-train_observations_df <- UCI_HAR_Dataset/train/X_train.txt
+   UCI_HAR_Dataset/features.txt
+   UCI_HAR_Dataset/activity_labels.txt
+   UCI_HAR_Dataset/features_info.txt
+   test_subject_df <- UCI_HAR_Dataset/test/subject_test.txt
+   test_activity_df <- UCI_HAR_Dataset/test/y_test.txt
+   test_observations_df <- UCI_HAR_Dataset/test/X_test.txt
+   train_subject_df <- UCI_HAR_Dataset/train/subject_train.txt
+   train_activity_df <- UCI_HAR_Dataset/train/y_train.txt
+   train_observations_df <- UCI_HAR_Dataset/train/X_train.txt
 
 ###Cleaning of the data
-Load required libraries
-Read Test Files
-Merge Subject, Activity, and Observation Data
-Read Training Files
-Merge Subject, Activity, and Observation Data
-Merge Test and Training Data
-Read Observation Labels
-Create vector of observations columns with "-std()" or "-mean()" add offset for subject and activity
-Select subject, activity, std and mean columns from raw_data
-Read Activity Descriptions
-Merge Activity Name data 
-Clean up sm_data columns
-Create descriptive name vector for sm_data from features.txt
-Apply descriptive names to sm_data data frame
-Create tidy dataset of average variable values for each activity and each subject
-Create meaningfull names for tidy dataset columns
-Write tidy dataset to file
+ - Load required libraries
+ - Read Test Files
+ - Merge Subject, Activity, and Observation Data
+ - Read Training Files
+ - Merge Subject, Activity, and Observation Data
+ - Merge Test and Training Data
+ - Read Observation Labels
+ - Create vector of observations columns with "-std()" or "-mean()" add offset for subject and activity
+ - Select subject, activity, std and mean columns from raw_data
+ - Read Activity Descriptions
+ - Merge Activity Name data 
+ - Clean up sm_data columns
+ - Create descriptive name vector for sm_data from features.txt
+ - Apply descriptive names to sm_data data frame
+ - Create tidy dataset of average variable values for each activity and each subject
+ - Create meaningfull names for tidy dataset columns
+ - Write tidy dataset to file
 
 ##Description of the variables in the gd_couresproj_tidyout.txt file
 
