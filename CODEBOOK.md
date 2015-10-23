@@ -52,622 +52,340 @@ UCI_HAR_Dataset/features.txt
 ##Creating the tidy datafile
 
 ###Guide to create the tidy data file
-Description on how to create the tidy data file (1. download the data, ...)/
+Download and unzip data file from link provided
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
+You should create one R script called run_analysis.R that does the following. 
+1. Merges the training and the test sets to create one data set.
+2. Extracts only the measurements on the mean and standard deviation for each measurement. 
+3. Uses descriptive activity names to name the activities in the data set
+4. Appropriately labels the data set with descriptive variable names. 
+5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+
+####File locations:
+UCI_HAR_Dataset/features.txt
+UCI_HAR_Dataset/activity_labels.txt
+UCI_HAR_Dataset/features_info.txt
+test_subject_df <- UCI_HAR_Dataset/test/subject_test.txt
+test_activity_df <- UCI_HAR_Dataset/test/y_test.txt
+test_observations_df <- UCI_HAR_Dataset/test/X_test.txt
+train_subject_df <- UCI_HAR_Dataset/train/subject_train.txt
+train_activity_df <- UCI_HAR_Dataset/train/y_train.txt
+train_observations_df <- UCI_HAR_Dataset/train/X_train.txt
 
 ###Cleaning of the data
-Short, high-level description of what the cleaning script does. [link to the readme document that describes the code in greater detail]()
+Load required libraries
+Read Test Files
+Merge Subject, Activity, and Observation Data
+Read Training Files
+Merge Subject, Activity, and Observation Data
+Merge Test and Training Data
+Read Observation Labels
+Create vector of observations columns with "-std()" or "-mean()" add offset for subject and activity
+Select subject, activity, std and mean columns from raw_data
+Read Activity Descriptions
+Merge Activity Name data 
+Clean up sm_data columns
+Create descriptive name vector for sm_data from features.txt
+Apply descriptive names to sm_data data frame
+Create tidy dataset of average variable values for each activity and each subject
+Create meaningfull names for tidy dataset columns
+Write tidy dataset to file
 
 ##Description of the variables in the gd_couresproj_tidyout.txt file
 
 ###group_by_activity_name
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+This variable represents the activity being performed when the measurements were recorded
+ - Class: Factor w/ 6 Levels
+ - Unique values/levels of the variable:
+      WALKING
+      WALKING_UPSTAIRS
+      WALKING_DOWNSTAIRS
+      SITTING
+      STANDING
+      LAYING
+ - Unit of measurement: NONE
 
 ###group_by_subject_id
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
+This variable represents the identfication number assigned to research study participants
+ - Class: Integer
  - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+      Integer value from 1 to 30 corresponding with each study participant
+ - Unit of measurement: NONE
+
+###avg(general information)
+These variables represent the average mean and standard deviations computed from the measurement in the studay data collected described below.  The naming convention used adhers to the one set put for the study data with the prefix avg to indicate average values.
+
+The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
+
+Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
+
+Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
+
+These signals were used to estimate variables of the feature vector for each pattern:  
+'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
 
 ###avg_tBodyAcc-mean()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyAcc-mean()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyAcc-mean()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyAcc-std()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyAcc-std()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyAcc-std()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tGravityAcc-mean()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tGravityAcc-mean()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tGravityAcc-mean()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tGravityAcc-std()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tGravityAcc-std()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tGravityAcc-std()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyAccJerk-mean()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyAccJerk-mean()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyAccJerk-mean()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyAccJerk-std()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyAccJerk-std()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyAccJerk-std()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyro-mean()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyro-mean()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyro-mean()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyro-std()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyro-std()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyro-std()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyroJerk-mean()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyroJerk-mean()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyroJerk-mean()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyroJerk-std()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyroJerk-std()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyroJerk-std()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyAccMag-mean()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyAccMag-std()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tGravityAccMag-mean()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tGravityAccMag-std()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyAccJerkMag-mean()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyAccJerkMag-std()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyroMag-mean()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyroMag-std()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyroJerkMag-mean()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_tBodyGyroJerkMag-std()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Time Domain Signal
 
 ###avg_fBodyAcc-mean()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyAcc-mean()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyAcc-mean()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyAcc-std()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyAcc-std()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyAcc-std()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyAccJerk-mean()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyAccJerk-mean()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyAccJerk-mean()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyAccJerk-std()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyAccJerk-std()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyAccJerk-std()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyGyro-mean()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyGyro-mean()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyGyro-mean()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyGyro-std()-X
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyGyro-std()-Y
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyGyro-std()-Z
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyAccMag-mean()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyAccMag-std()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyBodyAccJerkMag-mean()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyBodyAccJerkMag-std()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyBodyGyroMag-mean()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyBodyGyroMag-std()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyBodyGyroJerkMag-mean()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
 ###avg_fBodyBodyGyroJerkMag-std()
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
+ - Class: Number
+ - Unit of measurement: Frequency Domain Signal
 
