@@ -63,15 +63,15 @@ You should create one R script called run_analysis.R that does the following.
    5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 ####File locations:
-   UCI_HAR_Dataset/features.txt
-   UCI_HAR_Dataset/activity_labels.txt
-   UCI_HAR_Dataset/features_info.txt
-   test_subject_df <- UCI_HAR_Dataset/test/subject_test.txt
-   test_activity_df <- UCI_HAR_Dataset/test/y_test.txt
-   test_observations_df <- UCI_HAR_Dataset/test/X_test.txt
-   train_subject_df <- UCI_HAR_Dataset/train/subject_train.txt
-   train_activity_df <- UCI_HAR_Dataset/train/y_train.txt
-   train_observations_df <- UCI_HAR_Dataset/train/X_train.txt
+ - UCI_HAR_Dataset/features.txt
+ - UCI_HAR_Dataset/activity_labels.txt
+ - UCI_HAR_Dataset/features_info.txt
+ - test_subject_df <- UCI_HAR_Dataset/test/subject_test.txt
+ - test_activity_df <- UCI_HAR_Dataset/test/y_test.txt
+ - test_observations_df <- UCI_HAR_Dataset/test/X_test.txt
+ - train_subject_df <- UCI_HAR_Dataset/train/subject_train.txt
+ - train_activity_df <- UCI_HAR_Dataset/train/y_train.txt
+ - train_observations_df <- UCI_HAR_Dataset/train/X_train.txt
 
 ###Cleaning of the data
  - Load required libraries
