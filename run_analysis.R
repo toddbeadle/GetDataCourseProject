@@ -52,7 +52,7 @@ raw_data <- rbind(test_data, train_data)
 obs_label <- read.table("UCI_HAR_Dataset/features.txt")
 
 # Create vector of observations columns with "-std()" or "-mean()" add offset for subject and activity
-std_and_mean <- which(grepl("-std()", obs_label$V2) | grepl("-mean()", obs_label$V2)) + 2
+std_and_mean <- which(grepl("-std\\(\\)", obs_label$V2) | grepl("-mean\\(\\)", obs_label$V2)) + 2
 
 # Select subject, activity, std and mean columns from raw_data
 sm_data <- select(raw_data, 1, 2, std_and_mean)
@@ -60,5 +60,24 @@ sm_data <- select(raw_data, 1, 2, std_and_mean)
 # Read Activity Descriptions
 act_desc <- read.table("UCI_HAR_Dataset/activity_labels.txt")
 names(act_desc)[1:2] <- c("activity_id","activity_name")
+
+# Merge Activity Name data 
 sm_data <- merge(sm_data, act_desc, by = "activity_id")
-sm_data <- select(sm_data, subject_id, activity_id, activity_name, V1:V552)
+
+# Clean up sm_data columns
+sm_data <- select(sm_data, subject_id, activity_id, activity_name, V1:V543)
+
+# Create descriptive name vector for sm_data from features.txt
+new_labels <- select(obs_label[std_and_mean - 2,],V2)
+
+# Apply descriptive names to sm_data data frame
+names(sm_data) <- c(names(sm_data)[1:3], as.vector(new_labels$V2))
+
+# Create tidy dataset of average variable values for each activity and each subject
+tidy_out <- aggregate(sm_data[,4:ncol(sm_data)], list(sm_data$activity_name,sm_data$subject_id), mean)
+
+# Create meaningfull names for tidy dataset columns
+names(tidy_out) <- c(paste("group_by_",names(sm_data)[3], sep = ""),paste("group_by_",names(sm_data)[1], sep = ""), paste("avg_", new_labels$V2,sep = ""))
+
+# Write tidy dataset to file
+write.table(tidy_out, file = "gd_couresproj_tidyout.txt", row.names=FALSE)
